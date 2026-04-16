@@ -159,20 +159,6 @@ Your job: Select the MOST PLAUSIBLE cause(s) that directly led to the target eve
 - Multiple causes can be correct if they all plausibly contributed to the event
 - Output ONLY the letter(s) of your answer
 - Format examples: "A", "C", "AB", "BCD", "AD"
-
-## Note
-In this task, each multiple-choice question is graded as follows:
-- Full credit (1 point): All and only the correct options are selected.
-- Partial credit (0.5 point): Only a subset of correct options are selected, and no incorrect option is selected.
-- Zero credit (0 point): Any incorrect option is selected, regardless of whether correct options are also selected.
-To maximize your score, you should:
-Only select a candidate cause if:
-- There is direct evidence in the documents supporting it, and
-- The causal mechanism is clear and specific, not merely plausible in general.
-- Avoid selecting causes that are weakly supported, indirect, speculative, or only generally associated with the event.
-- If uncertain between two causes, prefer the safer subset (fewer options) to avoid including an incorrect one.
-- Do not assume that multiple causes are required — answer based on evidence, not on the expectation of multiple answers.
-
 Answer:"""
 
 
@@ -208,20 +194,6 @@ def build_one_shot_prompt(example_q: Dict, example_docs: str, target_q: Dict, ta
 
 ## Instructions
 Output ONLY the letter(s) of your answer (e.g., "A", "C", "AB", "BCD").
-
-## Note
-In this task, each multiple-choice question is graded as follows:
-- Full credit (1 point): All and only the correct options are selected.
-- Partial credit (0.5 point): Only a subset of correct options are selected, and no incorrect option is selected.
-- Zero credit (0 point): Any incorrect option is selected, regardless of whether correct options are also selected.
-To maximize your score, you should:
-Only select a candidate cause if:
-- There is direct evidence in the documents supporting it, and
-- The causal mechanism is clear and specific, not merely plausible in general.
-- Avoid selecting causes that are weakly supported, indirect, speculative, or only generally associated with the event.
-- If uncertain between two causes, prefer the safer subset (fewer options) to avoid including an incorrect one.
-- Do not assume that multiple causes are required — answer based on evidence, not on the expectation of multiple answers.
-
 Answer:"""
 
 
@@ -244,19 +216,6 @@ def build_few_shot_prompt(examples: List[Dict], example_docs_list: List[str],
     prompt += f"**Retrieved Documents:**\n{target_docs if target_docs else 'No documents available.'}\n\n"
     prompt += f"**Candidate Causes:**\n{format_options(target_q)}\n\n"
     prompt += "Answer (only the letter(s), e.g., 'A', 'BC', 'ABD'):"
-    prompt += """## Note
-In this task, each multiple-choice question is graded as follows:
-- Full credit (1 point): All and only the correct options are selected.
-- Partial credit (0.5 point): Only a subset of correct options are selected, and no incorrect option is selected.
-- Zero credit (0 point): Any incorrect option is selected, regardless of whether correct options are also selected.
-To maximize your score, you should:
-Only select a candidate cause if:
-- There is direct evidence in the documents supporting it, and
-- The causal mechanism is clear and specific, not merely plausible in general.
-- Avoid selecting causes that are weakly supported, indirect, speculative, or only generally associated with the event.
-- If uncertain between two causes, prefer the safer subset (fewer options) to avoid including an incorrect one.
-- Do not assume that multiple causes are required — answer based on evidence, not on the expectation of multiple answers."""
-
     return prompt
 
 
@@ -285,19 +244,6 @@ When analyzing a cause-effect scenario, follow this reasoning process:
 5. **Output your final answer** in format: "Answer: X" where X is letter(s) like A, BC, ABD
 
 Be thorough in your reasoning. Multiple causes can be correct if they all plausibly contributed.
-
-## Note
-In this task, each multiple-choice question is graded as follows:
-- Full credit (1 point): All and only the correct options are selected.
-- Partial credit (0.5 point): Only a subset of correct options are selected, and no incorrect option is selected.
-- Zero credit (0 point): Any incorrect option is selected, regardless of whether correct options are also selected.
-To maximize your score, you should:
-Only select a candidate cause if:
-- There is direct evidence in the documents supporting it, and
-- The causal mechanism is clear and specific, not merely plausible in general.
-- Avoid selecting causes that are weakly supported, indirect, speculative, or only generally associated with the event.
-- If uncertain between two causes, prefer the safer subset (fewer options) to avoid including an incorrect one.
-- Do not assume that multiple causes are required — answer based on evidence, not on the expectation of multiple answers.
 """
 
     user_prompt = ""
